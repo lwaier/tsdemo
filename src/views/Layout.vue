@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div class="layout">
     <div v-if="false">
       <h1>{{title}}</h1>
       <h2>{{info.year}}/0{{info.month}}/0{{info.date}} {{info.hour}}:{{info.minutes}}</h2>
@@ -64,8 +64,11 @@ export default class Layout extends Vue{
   private defafultActive = '002'
   private goToOnePage(data: {url: string;[propName: string]: unknown}): void{
     const url = data.url;
+    //当跳转的是当前页面 直接返回
+    if(this.$route.name == url){
+      return; 
+    }
     this.$router.push({name:url})
-    console.log(this.$route,'');
   }
 
 
@@ -87,8 +90,9 @@ export default class Layout extends Vue{
 </script>
 
 <style lang="scss" scoped>
-  .about{
+  .layout{
     width: 100%;
+    margin-bottom: 10px;
     .navtop{
       height: 100px;
       border-bottom: 1px solid #dcdfe6;
