@@ -1,19 +1,19 @@
 <template>
   <div class="work">
-    <div style="width:500px;height:500px" ref="one"></div>
+    <div ref="one" class="one"></div>
+    <div @click="goToOther">我要去别的页面</div>
   </div>
 </template>
 
-<script>
-
+<script lang="ts">
 
 
 import {Component,Vue} from 'vue-property-decorator'
 @Component
 export default class Work extends Vue{
+
   mounted() {
     // 基于准备好的dom，初始化echarts实例
-    console.log(this.$refs.one,'this.$refs.one');
     const myChart = this.$api.echarts.init(this.$refs.one);
     // 绘制图表
     myChart.setOption({
@@ -32,6 +32,8 @@ export default class Work extends Vue{
         }]
     }); 
   }
+
+  
 }
 
 
@@ -41,6 +43,10 @@ export default class Work extends Vue{
   .work{
     margin-left: 10px;
     margin-right: 10px;
-    margin-bottom: 50px;
+    .one{
+      width: 500px;
+      height: 500px;
+      float: left;
+    }
   }
 </style>

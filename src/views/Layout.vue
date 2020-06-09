@@ -19,7 +19,7 @@
 
 <script lang="ts">
 
-import {Component,Vue} from 'vue-property-decorator'
+import {Component,Vue,Watch} from 'vue-property-decorator'
 interface Itimer {
   getFullYear: () => number;
   getMonth: () => number;
@@ -70,8 +70,9 @@ export default class Layout extends Vue{
     }
     this.$router.push({name:url})
   }
-
-
+  private routerName = '1'
+  
+  //加载的时候获取路由的信息并确定该active的菜单
   created() {
     const timer: Itimer = new Date() 
     this.info.year = String(timer.getFullYear());
@@ -81,8 +82,28 @@ export default class Layout extends Vue{
     this.info.minutes = String(timer.getMinutes());
     console.log(this.info,'');
     // this.info.year = timer.getFullYear();
+    // const that = this;
+    const name = this.$route.name; //获取当前的name
+    console.log(this.$route.name,'');
+    this.navTopList.forEach(item=>{
+
+      if((item as {url: string}).url == name){
+        this.defafultActive = (item as {id: string}).id
+      }
+    })
   }
-    
+
+
+  //监听路由变化 菜单动态变换
+  @Watch('$route',{immediate:true,deep:true})
+  getNavTopListActive(newVal: {}){
+    const name = (newVal as {name: string}).name;
+    this.navTopList.forEach(item=>{
+      if((item as {url: string}).url == name){
+        this.defafultActive = (item as {id: string}).id
+      }
+    })
+  }
   
 
 }
@@ -92,10 +113,11 @@ export default class Layout extends Vue{
 <style lang="scss" scoped>
   .layout{
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 50px;
     .navtop{
       height: 100px;
       border-bottom: 1px solid #dcdfe6;
+      margin-bottom: 30px;
       .navtop_left{
         float: left;
         height: 100%;
