@@ -33,7 +33,6 @@ export default class Work extends Vue{
     // 得到echartsOne实例
     const myEchartOne = this.$api.echarts.init(this.$refs.one);
 
-  
     myEchartOne.setOption(xiaobaiOptions.optionsOne); 
 
     // 得到echartsTwo实例

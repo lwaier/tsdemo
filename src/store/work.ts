@@ -19,6 +19,13 @@ export default {
       switch(setId){
         case '000': //'000'代表李小白的数据
           commit('',{selectOptions:xiaobaiOptions})
+          break;
+        case '001': //'000'代表李小白的数据
+          commit('',{selectOptions:xiaobaiOptions})
+          break;
+        case '002': //'000'代表李小白的数据
+          commit('',{selectOptions:xiaobaiOptions})
+          break;
       }
     },
   },
